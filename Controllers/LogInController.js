@@ -59,7 +59,6 @@ module.exports = function(expressServer) {
 
     //Home URL    
     expressServer.get('/', function(req, res) {
-        console.log('Server Hit..!!');
         res.status(200).json('Pushkal');
     });
 
