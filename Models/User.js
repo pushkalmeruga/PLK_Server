@@ -11,7 +11,6 @@ var userSchema = mongoose.Schema({
     googleId: String,
     accessToken: String,
     password: String,
-    sales: [],
     createdDate: Date,
     updatedDate: Date
 });

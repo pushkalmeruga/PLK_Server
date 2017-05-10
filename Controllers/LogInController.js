@@ -20,7 +20,6 @@ passport.use('google', new GoogleStrategy({
                     googleId: profile.id,
                     accessToken: accessToken,
                     password: profile.emails[0].value,
-                    sales: ['pip', 'pop'],
                     createdDate: Date.now(),
                     updatedDate: ''
                 });
