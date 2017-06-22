@@ -38,8 +38,4 @@ userSchema.statics.findUser = function(googleId, cb) {
     });
 }
 
-// userSchema.methods.UpdateUser = function(location, cb) {
-//     this.
-// }
-
 module.exports = mongoose.model('User', userSchema, 'Users');
