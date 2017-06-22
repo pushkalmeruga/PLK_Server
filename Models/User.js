@@ -1,12 +1,9 @@
 var mongoose = require('mongoose');
 var mongoConnection = require('../Mongo');
 var config = require('../config');
-var salesSchema = require('./Sale');
-var locationSchema = require('./Location');
 
 //user model
 var userSchema = mongoose.Schema({
-    _id: String,
     userName: String,
     googleId: String,
     accessToken: String,
@@ -27,7 +24,6 @@ userSchema.methods.SaveUser = function(cb) {
         }
     });
     return cb(null, null);
-
 }
 
 //Method to find the user

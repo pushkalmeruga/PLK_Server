@@ -3,6 +3,7 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var config = require('../config');
 var User = require('../Models/User.js');
 var Location = require('../Models/Location');
+var bodyParser = require('body-parser');
 
 passport.use('google', new GoogleStrategy({
         clientID: config.WebClientId,
@@ -15,7 +16,6 @@ passport.use('google', new GoogleStrategy({
         User.findUser(profile.id, function(err, data) {
             if (data === false) {
                 var user = new User({
-                    _id: profile.id,
                     userName: profile.displayName,
                     googleId: profile.id,
                     accessToken: accessToken,
@@ -53,6 +53,8 @@ passport.deserializeUser(function(user, done) {
 
 module.exports = function(expressServer) {
 
+    var jsonParser = bodyParser.json();
+
     //Initializing the passport.js
     expressServer.use(passport.initialize());
 
@@ -76,4 +78,19 @@ module.exports = function(expressServer) {
             res.redirect('/');
         }
     );
+
+    //Normal Login
+    expressServer.post('/signin', jsonParser, function(req, res) {
+        var usame = req.body.username;
+        var password = req.body.password;
+
+        User.findOne({ userName: req.body.username }, function(error, data) {
+            if (error) {
+                console.error(error);
+            }
+            console.log(data + 'something');
+            res.json('working');
+        });
+
+    });
 };
