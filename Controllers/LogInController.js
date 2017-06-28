@@ -88,7 +88,6 @@ module.exports = function(expressServer) {
             if (error) {
                 console.error(error);
             }
-            console.log(data + 'something');
             res.json('working');
         });
 

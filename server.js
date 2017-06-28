@@ -3,6 +3,7 @@ var express = require('express');
 var loginController = require('./Controllers/LogInController');
 var salesController = require('./Controllers/SalesController');
 var server = express();
+
 loginController(server);
 salesController(server);
 

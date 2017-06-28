@@ -25,4 +25,15 @@ module.exports = function(expressServer) {
 
         return res.json("Saved..!!");
     });
+
+    expressServer.get('/GetAll', function(req, res) {
+        Item.GetAll(function(err, data) {
+            if (err) {
+                res.json('Get items failed..!!');
+                throw err;
+            } else {
+                res.json(data);
+            }
+        })
+    });
 }

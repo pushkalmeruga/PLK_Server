@@ -29,4 +29,16 @@ itemSchema.methods.SaveItem = function(cb) {
     return cb(null, null);
 }
 
+itemSchema.statics.GetAll = function(cb) {
+    mongoConnection(); //Checking the mongodb connection
+    this.find({}, function(err, data) {
+        if (err) {
+            return cb(err, null);
+        } else {
+            return cb(null, data);
+        }
+    });
+
+}
+
 module.exports = mongoose.model('Item', itemSchema, 'items');
