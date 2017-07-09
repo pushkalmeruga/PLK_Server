@@ -9,6 +9,7 @@ var userSchema = mongoose.Schema({
     LastName: String,
     EmailId: String,
     Password: String,
+    ProfilePic: String,
     DefaultLocation: String,
     MobileNumber: String,
     createdDate: Date,
@@ -22,12 +23,11 @@ userSchema.methods.SaveUser = function(callback) {
 
     mongoose.model('User').findOne({ 'UserName': this.UserName }).then((res) => {
         if (res) {
-            console.log('Username already exists. Try with other username..!!');
             return callback('Username already exists. Try with other username..!!');
         } else {
             this.save()
                 .then((result) => {
-                    return callback('User is saved successfully..!!');
+                    return callback(result);
                 })
                 .catch((err) => {
                     return callback(err);
@@ -49,5 +49,15 @@ userSchema.statics.SignIn = function(userName, password, callback) {
     });
 }
 
+//Update profile
+userSchema.methods.UpdateProfile = function(callBack) {
+    mongoConnection(); //Checking the mongodb connection
+
+    mongoose.model('User').findOneAndUpdate({ 'UserName': this.UserName }, this, { new: true }).then((res) => {
+        return callBack(res);
+    }).catch((err) => {
+        return callBack(err);
+    });
+}
 
 module.exports = mongoose.model('User', userSchema, 'Users');

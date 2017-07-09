@@ -13,7 +13,6 @@ module.exports = function(expressServer) {
 
     //Sign in
     expressServer.post('/signin', jsonParser, function(req, res) {
-        console.log(req.body);
         User.SignIn(req.body.UserName, req.body.Password, function(result) {
             res.send(result);
         });
@@ -35,6 +34,26 @@ module.exports = function(expressServer) {
         });
 
         user.SaveUser(function(result) {
+            res.send(result);
+        });
+    })
+
+    //Update profile
+    expressServer.post('/updateProfile', jsonParser, function(req, res) {
+
+        var user = new User({
+            _id: 0,
+            UserName: req.body.UserName,
+            FirstName: req.body.FirstName,
+            LastName: req.body.LastName,
+            EmailId: req.body.EmailId,
+            Password: req.body.Password,
+            DefaultLocation: req.body.DefaultLocation,
+            MobileNumber: req.body.Mobile,
+            updatedDate: Date.now()
+        });
+
+        user.UpdateProfile(function(result) {
             res.send(result);
         });
     })
