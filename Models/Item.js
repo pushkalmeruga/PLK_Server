@@ -28,7 +28,8 @@ itemSchema.methods.SaveItem = function(callBack) {
     });
 }
 
-itemSchema.statics.GetAll = function(callBack) {
+//Get all the Items
+itemSchema.statics.GetAllItems = function(callBack) {
     mongoConnection(); //Checking the mongodb connection
     this.find({}).then((res) => {
         return callBack(res);

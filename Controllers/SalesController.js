@@ -23,7 +23,7 @@ module.exports = function(expressServer) {
         });
     });
 
-    expressServer.get('/GetAll', function(req, res) {
+    expressServer.get('/GetAllItems', function(req, res) {
         Item.GetAll(function(result) {
             res.send(result);
         })
