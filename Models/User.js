@@ -4,38 +4,50 @@ var config = require('../config');
 
 //user model
 var userSchema = mongoose.Schema({
-    userName: String,
-    googleId: String,
-    accessToken: String,
-    password: String,
+    UserName: String,
+    FirstName: String,
+    LastName: String,
+    EmailId: String,
+    Password: String,
+    DefaultLocation: String,
+    MobileNumber: String,
     createdDate: Date,
     updatedDate: Date
 });
 
-//Method to save the user
-userSchema.methods.SaveUser = function(cb) {
-    var result = null;
+//save the user
+userSchema.methods.SaveUser = function(callback) {
+
     mongoConnection(); //Checking the mongodb connection
-    this.save(function(err) {
-        if (err) {
-            return cb(err, null);
+
+    mongoose.model('User').findOne({ 'UserName': this.UserName }).then((res) => {
+        if (res) {
+            console.log('Username already exists. Try with other username..!!');
+            return callback('Username already exists. Try with other username..!!');
         } else {
-            return cb(null, true);
+            this.save()
+                .then((result) => {
+                    return callback('User is saved successfully..!!');
+                })
+                .catch((err) => {
+                    return callback(err);
+                });
         }
+    }).catch((err) => {
+        return callback(err);
     });
-    return cb(null, null);
 }
 
-//Method to find the user
-userSchema.statics.findUser = function(googleId, cb) {
+//Sign in
+userSchema.statics.SignIn = function(userName, password, callback) {
     mongoConnection(); //Checking the mongodb connection
-    this.findOne({ 'googleId': googleId }, function(err, data) {
-        if (data) {
-            return cb(null, true);
-        } else {
-            return cb(null, false);
-        }
+
+    this.findOne({ 'UserName': userName, 'Password': password }).then((res) => {
+        return callback(res);
+    }).catch((err) => {
+        return callback(err);
     });
 }
+
 
 module.exports = mongoose.model('User', userSchema, 'Users');
