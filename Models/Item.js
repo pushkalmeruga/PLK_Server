@@ -10,9 +10,10 @@ var itemSchema = mongoose.Schema({
     Brand: String,
     snaps: [],
     Price: Number,
-    CustomerId: String,
+    CustomerUserName: String,
     MobileNumber: String,
     EmailId: String,
+    Location: String,
     createdDate: Date,
     updatedDate: Date
 });
@@ -38,5 +39,16 @@ itemSchema.statics.GetAllItems = function(callBack) {
     });
 
 }
+
+//Get items based on the query
+itemSchema.statics.GetItems = function(query, callBack) {
+    console.log(query);
+    mongoConnection(); //Checking the mongodb connection
+    this.find(query).then((res) => {
+        return callBack(res);
+    }).catch((err) => {
+        return callBack(err);
+    });
+};
 
 module.exports = mongoose.model('Item', itemSchema, 'items');
