@@ -5,7 +5,8 @@ var config = require('../config');
 //Item model
 var itemSchema = mongoose.Schema({
     isSold: Boolean,
-    ItemName: String,
+    ItemType: String,
+    PartName: String,
     Model: String,
     Brand: String,
     snaps: [],
@@ -42,7 +43,6 @@ itemSchema.statics.GetAllItems = function(callBack) {
 
 //Get items based on the query
 itemSchema.statics.GetItems = function(query, callBack) {
-    console.log(query);
     mongoConnection(); //Checking the mongodb connection
     this.find(query).then((res) => {
         return callBack(res);

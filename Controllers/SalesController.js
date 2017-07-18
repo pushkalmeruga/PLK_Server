@@ -9,7 +9,8 @@ module.exports = function(expressServer) {
     expressServer.post('/saveItem', jsonParser, function(req, res) {
         item = new Item({
             isSold: false,
-            ItemName: req.body.ItemName,
+            ItemType: req.body.ItemType,
+            PartName: req.body.PartName,
             CustomerUserName: req.body.CustomerUserName,
             Model: req.body.Model,
             Brand: req.body.Brand,
@@ -34,16 +35,16 @@ module.exports = function(expressServer) {
 
     //Get items based on the query
     expressServer.post('/GetItems', jsonParser, function(req, res) {
-        item = new Item({
-            _id: 0,
-            Name: req.body.Name,
-            Model: req.body.Model,
-            Brand: req.body.Brand,
-            Price: req.body.Price,
-            Location: req.body.Location
-        });
-
-        Item.GetItems(item, function(result) {
+        var query = {};
+        for (var key in req.body) {
+            if ((req.body).hasOwnProperty(key)) {
+                var value = (req.body)[key];
+                if (value != "" && value != undefined && value != 'null') {
+                    query[key] = value;
+                }
+            }
+        };
+        Item.GetItems(query, function(result) {
             res.send(result);
         })
     });
