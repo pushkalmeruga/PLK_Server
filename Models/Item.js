@@ -51,4 +51,15 @@ itemSchema.statics.GetItems = function(query, callBack) {
     });
 };
 
+//Update the Item
+itemSchema.methods.UpdateItem = function(callBack) {
+    mongoConnection();
+
+    mongoose.model('Item').findOneAndUpdate({ '_id': this._id }, this, { new: true }).then((res) => {
+        return callBack(res);
+    }).catch((err) => {
+        return callBack(err);
+    });
+};
+
 module.exports = mongoose.model('Item', itemSchema, 'items');

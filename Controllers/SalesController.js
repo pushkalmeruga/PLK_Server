@@ -48,4 +48,24 @@ module.exports = function(expressServer) {
             res.send(result);
         })
     });
+
+    //Update the item
+    expressServer.post('/updateItem', jsonParser, function(req, res) {
+
+        item = new Item({
+            _id: req.body._id,
+            isSold: req.body.isSold,
+            ItemType: req.body.ItemType,
+            PartName: req.body.PartName,
+            Model: req.body.Model,
+            Brand: req.body.Brand,
+            Price: req.body.Price,
+            Location: req.body.Location,
+            updatedDate: Date.now()
+        });
+
+        item.UpdateItem(function(result) {
+            res.send(result);
+        });
+    })
 }
