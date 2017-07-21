@@ -28,7 +28,7 @@ module.exports = function(expressServer) {
 
     //Get all items
     expressServer.get('/GetAllItems', function(req, res) {
-        Item.GetAll(function(result) {
+        Item.GetAllItems(function(result) {
             res.send(result);
         })
     });
