@@ -29,7 +29,7 @@ module.exports = function(expressServer) {
             EmailId: req.body.EmailId,
             Password: req.body.Password,
             DefaultLocation: req.body.DefaultLocation,
-            MobileNumber: req.body.Mobile,
+            MobileNumber: req.body.MobileNumber,
             createdDate: Date.now()
         });
 

@@ -23,7 +23,7 @@ userSchema.methods.SaveUser = function(callback) {
 
     mongoose.model('User').findOne({ 'UserName': this.UserName }).then((res) => {
         if (res) {
-            return callback('Username already exists. Try with other username..!!');
+            return callback(false);
         } else {
             this.save()
                 .then((result) => {
