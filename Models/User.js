@@ -9,7 +9,7 @@ var userSchema = mongoose.Schema({
     LastName: String,
     EmailId: String,
     Password: String,
-    ProfilePic: String,
+    ProfilePicture: String,
     DefaultLocation: String,
     MobileNumber: String,
     createdDate: Date,

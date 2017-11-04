@@ -40,7 +40,7 @@ module.exports = function(expressServer) {
 
     //Update profile
     expressServer.post('/updateProfile', jsonParser, function(req, res) {
-
+        
         var user = new User({
             _id: 0,
             UserName: req.body.UserName,
@@ -48,6 +48,7 @@ module.exports = function(expressServer) {
             LastName: req.body.LastName,
             EmailId: req.body.EmailId,
             Password: req.body.Password,
+            ProfilePicture:req.body.ProfilePicture,
             DefaultLocation: req.body.DefaultLocation,
             MobileNumber: req.body.Mobile,
             updatedDate: Date.now()
