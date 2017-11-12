@@ -4,12 +4,12 @@ var config = require('../config');
 
 //Item model
 var itemSchema = mongoose.Schema({
-    isSold: Boolean,
+    IsSold: Boolean,
     ItemType: String,
     PartName: String,
     Model: String,
     Brand: String,
-    snaps: [],
+    ItemImages: [],
     Price: Number,
     CustomerUserName: String,
     MobileNumber: String,
@@ -24,7 +24,7 @@ itemSchema.methods.SaveItem = function(callBack) {
     mongoConnection(); //Checking the mongodb connection
 
     this.save().then((res) => {
-        return callBack(res);
+        return callBack(true);
     }).catch((err) => {
         return callBack(err);
     });

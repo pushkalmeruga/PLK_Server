@@ -8,7 +8,7 @@ module.exports = function(expressServer) {
     //Saving the Item
     expressServer.post('/saveItem', jsonParser, function(req, res) {
         item = new Item({
-            isSold: false,
+            IsSold: false,
             ItemType: req.body.ItemType,
             PartName: req.body.PartName,
             CustomerUserName: req.body.CustomerUserName,
@@ -18,6 +18,7 @@ module.exports = function(expressServer) {
             MobileNumber: req.body.MobileNumber,
             EmailId: req.body.EmailId,
             Location: req.body.Location,
+            ItemImages:req.body.ItemImages,
             createdDate: Date.now()
         });
 
