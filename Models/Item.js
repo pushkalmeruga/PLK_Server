@@ -15,6 +15,7 @@ var itemSchema = mongoose.Schema({
     MobileNumber: String,
     EmailId: String,
     Location: String,
+    Description: String,
     createdDate: Date,
     updatedDate: Date
 });
